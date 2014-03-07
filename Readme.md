@@ -1,7 +1,7 @@
 
 # auto-schema
 
-  Redis automatic schema generator based on a sample object.
+  Generate Redshift schemas from sample objects.
 
 ## Installation
 
