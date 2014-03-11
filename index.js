@@ -53,11 +53,12 @@ function autoschema(obj) {
 function type(schema, obj, prefix) {
   Object.keys(obj).forEach(function(key){
     var val = obj[key];
+
     if (isObject(val)) {
       type(schema, val, key + '.');
     } else {
       var t = typed(key, val);
-      if (t) schema[prefix + key] = t;
+      if (t) schema[prefix + normalize(key)] = t;
       else debug('cannot type %j', val);
     }
   });
@@ -118,4 +119,19 @@ function primitive(val) {
 
 function isObject(val) {
   return '[object Object]' == Object.prototype.toString.call(val);
+}
+
+/**
+ * Normalize `key`.
+ *
+ * @param {String} key
+ * @return {String}
+ * @api private
+ */
+
+function normalize(key) {
+  return key
+    .trim()
+    .toLowerCase()
+    .replace(/[\s-]+/g, '_');
 }

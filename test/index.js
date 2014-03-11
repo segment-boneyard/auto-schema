@@ -30,6 +30,20 @@ describe('strings', function(){
 })
 
 describe('keys', function(){
+  it('should be normalized', function(){
+    var s = schema({
+      'Foo-Bar ': 'baz',
+      'Something Here': 'baz',
+      foo_bar_Baz: 'something'
+    });
+
+    s.should.eql({
+      foo_bar: 'varchar',
+      something_here: 'varchar',
+      foo_bar_baz: 'varchar'
+    });
+  })
+
   describe('named "timestamp"', function(){
     it('should map to timestamp', function(){
       var s = schema({ timestamp: 1231241322 });
