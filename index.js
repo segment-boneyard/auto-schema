@@ -55,7 +55,7 @@ function type(schema, obj, prefix) {
     var val = obj[key];
 
     if (isObject(val)) {
-      type(schema, val, key + '.');
+      type(schema, val, normalize(key) + '.');
     } else {
       var t = typed(key, val);
       if (t) schema[prefix + normalize(key)] = t;
