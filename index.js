@@ -3,7 +3,7 @@
  * Module dependencies.
  */
 
-var debug = require('debug')('auto-schema');
+var tableize = require('tableize');
 
 /**
  * Expose `autoschema()`.
@@ -36,32 +36,26 @@ module.exports = autoschema;
  */
 
 function autoschema(obj) {
-  var schema = {};
-  type(schema, obj, '');
-  return schema;
+  return type(tableize(obj));
 }
 
 /**
- * Type `obj` recursively.
+ * Type `obj` and return the schema.
  *
- * @param {Object} schema
  * @param {Object} obj
- * @param {String} prefix
+ * @return {Object} schema
  * @api private
  */
 
-function type(schema, obj, prefix) {
-  Object.keys(obj).forEach(function(key){
+function type(obj) {
+  return Object.keys(obj).reduce(function(schema, key){
     var val = obj[key];
 
-    if (isObject(val)) {
-      type(schema, val, normalize(key) + '.');
-    } else {
-      var t = typed(key, val);
-      if (t) schema[prefix + normalize(key)] = t;
-      else debug('cannot type %j', val);
-    }
-  });
+    var type = typed(key, val);
+    if (type) schema[key] = type;
+
+    return schema;
+  }, {});
 }
 
 /**
@@ -119,19 +113,4 @@ function primitive(val) {
 
 function isObject(val) {
   return '[object Object]' == Object.prototype.toString.call(val);
-}
-
-/**
- * Normalize `key`.
- *
- * @param {String} key
- * @return {String}
- * @api private
- */
-
-function normalize(key) {
-  return key
-    .trim()
-    .toLowerCase()
-    .replace(/[\s-]+/g, '_');
 }
