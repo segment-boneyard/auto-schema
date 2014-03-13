@@ -38,9 +38,9 @@ describe('keys', function(){
     });
 
     s.should.eql({
-      foo_bar: 'varchar',
-      something_here: 'varchar',
-      foo_bar_baz: 'varchar'
+      Foo_Bar: 'varchar',
+      Something_Here: 'varchar',
+      foo_bar_Baz: 'varchar'
     });
   })
 
