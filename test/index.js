@@ -27,6 +27,11 @@ describe('strings', function(){
     var s = schema({ user: 'tobi' });
     s.should.eql({ user: 'varchar(2048)' });
   })
+
+  it('should allow specifying a length', function(){
+    var s = schema({ user: 'tobi' }, { varchar: 100 });
+    s.should.eql({ user: 'varchar(100)' });
+  })
 })
 
 describe('keys', function(){

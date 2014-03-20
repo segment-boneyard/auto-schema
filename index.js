@@ -31,29 +31,30 @@ module.exports = autoschema;
  * Generate a schema for the given `obj`.
  *
  * @param {Object} obj
+ * @param {Object} [opts]
  * @return {Object} schema
  * @api public
  */
 
-function autoschema(obj) {
-  return type(tableize(obj));
+function autoschema(obj, opts) {
+  opts = opts || {};
+  return type(tableize(obj), opts);
 }
 
 /**
  * Type `obj` and return the schema.
  *
  * @param {Object} obj
+ * @param {Object} opts
  * @return {Object} schema
  * @api private
  */
 
-function type(obj) {
+function type(obj, opts) {
   return Object.keys(obj).reduce(function(schema, key){
     var val = obj[key];
-
-    var type = typed(key, val);
+    var type = typed(key, val, opts);
     if (type) schema[key] = type;
-
     return schema;
   }, {});
 }
@@ -63,13 +64,14 @@ function type(obj) {
  *
  * @param {String} key
  * @param {Mixed} val
+ * @param {Object} opts
  * @return {String}
  * @api private
  */
 
-function typed(key, val) {
-  return keySpecific(key, val)
-    || primitive(val);
+function typed(key, val, opts) {
+  return keySpecific(key, val, opts)
+    || primitive(val, opts);
 }
 
 /**
@@ -77,6 +79,7 @@ function typed(key, val) {
  *
  * @param {String} key
  * @param {Mixed} val
+
  * @return {String}
  * @api private
  */
@@ -95,9 +98,10 @@ function keySpecific(key, val) {
  * @api private
  */
 
-function primitive(val) {
+function primitive(val, opts) {
+  var size = opts.varchar || 2048;
   switch (typeof val) {
-    case 'string': return 'varchar(2048)';
+    case 'string': return 'varchar(' + size + ')';
     case 'number': return 'float';
     case 'boolean': return 'boolean';
   }
