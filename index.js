@@ -97,7 +97,7 @@ function keySpecific(key, val) {
 
 function primitive(val) {
   switch (typeof val) {
-    case 'string': return 'varchar';
+    case 'string': return 'varchar(2048)';
     case 'number': return 'float';
     case 'boolean': return 'boolean';
   }

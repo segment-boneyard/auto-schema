@@ -25,7 +25,7 @@ describe('booleans', function(){
 describe('strings', function(){
   it('should map to varchar', function(){
     var s = schema({ user: 'tobi' });
-    s.should.eql({ user: 'varchar' });
+    s.should.eql({ user: 'varchar(2048)' });
   })
 })
 
@@ -38,9 +38,9 @@ describe('keys', function(){
     });
 
     s.should.eql({
-      Foo_Bar: 'varchar',
-      Something_Here: 'varchar',
-      foo_bar_Baz: 'varchar'
+      Foo_Bar: 'varchar(2048)',
+      Something_Here: 'varchar(2048)',
+      foo_bar_Baz: 'varchar(2048)'
     });
   })
 
@@ -64,8 +64,8 @@ describe('nested', function(){
     });
 
     s.should.eql({
-      'user.first': 'varchar',
-      'user.last': 'varchar',
+      'user.first': 'varchar(2048)',
+      'user.last': 'varchar(2048)',
       'user.age': 'float',
       'timestamp': 'timestamp'
     })
