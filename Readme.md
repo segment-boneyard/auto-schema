@@ -41,11 +41,11 @@ yields:
 
 ```js
 { 'user.id': 'float',
-  'name.first': 'varchar',
-  'name.last': 'varchar',
-  'properties.category': 'varchar',
-  'properties.label': 'varchar',
-  'context.userAgent': 'varchar' }
+  'name.first': 'varchar(2048)',
+  'name.last': 'varchar(2048)',
+  'properties.category': 'varchar(2048)',
+  'properties.label': 'varchar(2048)',
+  'context.userAgent': 'varchar(2048)' }
 ```
 
 # License
