@@ -1,4 +1,11 @@
 
+0.3.0 / 2014-03-20
+==================
+
+ * docs
+ * add .varchar option
+ * add varchar default length
+
 0.2.1 / 2014-03-13
 ==================
 
