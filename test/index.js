@@ -63,6 +63,10 @@ describe('nested', function(){
       user: {
         first: 'tobi',
         last: 'ferret',
+        nicks: {
+          shuppa: true,
+          foopa: true
+        },
         age: 2
       },
       timestamp: 1231232
@@ -72,7 +76,9 @@ describe('nested', function(){
       'user.first': 'varchar(2048)',
       'user.last': 'varchar(2048)',
       'user.age': 'float',
-      'timestamp': 'timestamp'
+      'timestamp': 'timestamp',
+      'user.nicks.shuppa': 'boolean',
+      'user.nicks.foopa': 'boolean'
     })
   })
 })

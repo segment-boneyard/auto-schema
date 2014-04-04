@@ -8,7 +8,7 @@
     "schema"
   ],
   "dependencies": {
-    "tableize": "^0.0.2"
+    "tableize": "^0.0.4"
   },
   "devDependencies": {
     "mocha": "*",
