@@ -99,7 +99,7 @@ function keySpecific(key, val) {
  */
 
 function primitive(val, opts) {
-  var size = opts.varchar || 2048;
+  var size = opts.varchar || 10240;
   switch (typeof val) {
     case 'string': return 'varchar(' + size + ')';
     case 'number': return 'float';
